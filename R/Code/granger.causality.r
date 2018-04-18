@@ -1,0 +1,13 @@
+install.packages("vars")
+library(vars)
+var2.fit=VAR(cbind(temp_ret,omega_ratio),p=2)
+v.cov=vcov(var2.fit)
+R=matrix(c(0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0),nrow=2,ncol=10,byrow=TRUE)
+avar=R%*%v.cov%*%t(R)
+temp.coef1=coef(var2.fit)$y1
+new.coef1=rbind(temp.coef1[5,1],as.matrix(temp.coef1[1:4,1]))
+temp.coef2=coef(var2.fit)$y2
+new.coef2=rbind(temp.coef2[5,1],as.matrix(temp.coef2[1:4,1]))
+vecPi=rbind(new.coef1,new.coef2)
+wald=t(R%*%vecPi)%*%solve(avar)%*%(R%*%vecPi)
+granger.causality=1-pchisq(wald,2)

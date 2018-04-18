@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Dirk Eddelbuettel" />
+
+<meta name="date" content="2015-08-13" />
+
+<title>Introducing Rblpapi</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+
+
+<link href="data:text/css;charset=utf-8,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23header%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%20code%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Introducing Rblpapi</h1>
+<h4 class="author"><em>Dirk Eddelbuettel</em></h4>
+<h4 class="date"><em>2015-08-13</em></h4>
+
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>The <a href="https://github.com/Rblp/Rblpapi">Rblpapi package</a> connects the <a href="https://www.r-project.org">R language and environment for statistical computing</a> to the <a href="https://www.bloomberg.com">Bloomberg</a> services supported by the <a href="https://www.bloomberglabs.com/api/">official Bloomberg APIs</a>.</p>
+<p>The <a href="https://github.com/Rblp/Rblpapi">Rblpapi package</a> is provided in both source and binary (for Windows and OS X) via the <a href="https://cran.r-project.org">CRAN</a> network for R. Source code is available <a href="https://github.com/Rblp/Rblpapi">at the corresponding GitHub repo</a>; the <a href="https://github.com/Rblp/blp">blp repo</a> contains the Bloomberg API components required during the build.</p>
+</div>
+<div id="usage" class="section level2">
+<h2>Usage</h2>
+<p>The next few section illustrate key functions within the package. All functions also have proper help pages for fuller details.</p>
+<div id="package-load" class="section level3">
+<h3>Package Load</h3>
+<p>Use</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(Rblpapi)</code></pre></div>
+<p>to load the package. You can also set options which will automatically connect at package load; see the next section.</p>
+</div>
+<div id="connecting" class="section level3">
+<h3>Connecting</h3>
+<p>Use</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">blpConnect</span>()</code></pre></div>
+<p>which will connect to the Bloomberg backend. Default values for the IP address (127.0.0.1) and port (8194) are used and can be overridden both as function arguments and via global options <code>blpHost</code> and <code>blpPort</code>. Moreover, if option <code>blpAutoConnect</code> is set to <code>TRUE</code>, this connection is done at package load.</p>
+<p>The resulting connection object is stored in a per-package environment providing a default value. If needed it can be overridden in each accessor function.</p>
+<p>As the connection object is being held onto, the <code>blpDisconnect()</code> function is implemented as an empty function without side-effects. The internal function <code>defaultConnection()</code> returns the current connection object.</p>
+</div>
+<div id="bdp-bloomberg-data-point" class="section level3">
+<h3>bdp: Bloomberg Data Point</h3>
+<p>Current (or most recent) values of market-related instruments can be accessed via the <code>bdp()</code> function:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bdp</span>(<span class="kw">c</span>(<span class="st">&quot;ESA Index&quot;</span>, <span class="st">&quot;SPY US Equity&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;PX_LAST&quot;</span>, <span class="st">&quot;VOLUME&quot;</span>))</code></pre></div>
+</div>
+<div id="bds-bloomberg-data-set" class="section level3">
+<h3>bds: Bloomberg Data Set</h3>
+<p>The <code>bds()</code> function can retrieve data of a more static nature:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bds</span>(<span class="st">&quot;GOOG US Equity&quot;</span>, <span class="st">&quot;TOP_20_HOLDERS_PUBLIC_FILINGS&quot;</span>)</code></pre></div>
+</div>
+<div id="bdh-bloomberg-data-history" class="section level3">
+<h3>bdh: Bloomberg Data History</h3>
+<p>Historical data (at a daily granularity) can be retrieved with <code>bdh()</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bdh</span>(<span class="st">&quot;SPY US Equity&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;PX_LAST&quot;</span>, <span class="st">&quot;VOLUME&quot;</span>), <span class="dt">start.date=</span><span class="kw">Sys.Date</span>()<span class="op">-</span><span class="dv">31</span>)</code></pre></div>
+</div>
+<div id="getbars-ohlcv-aggregates" class="section level3">
+<h3>getBars: OHLCV Aggregates</h3>
+<p>The <code>getBars()</code> function retrieves aggregated Open / High / Low / Close / Volume data. For example, in</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getBars</span>(<span class="st">&quot;ES1 Index&quot;</span>)</code></pre></div>
+<p>the default values of six hourly bars for the lead ES future.</p>
+</div>
+<div id="getticks-transactional-tick-data" class="section level3">
+<h3>getTicks: Transactional Tick Data</h3>
+<p>The <code>getTicks()</code> function retrieves tickdata, albeit with timestamps at a minute granularity. For example, the call</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getTicks</span>(<span class="st">&quot;ES1 Index&quot;</span>)</code></pre></div>
+<p>retrieves all ticks for the given security over the last hour.</p>
+</div>
+<div id="fieldsearch-query-for-fields" class="section level3">
+<h3>fieldSearch: Query For Fields</h3>
+<p>The <code>fieldSearch()</code> helper function can search for available fields which can be used with the <code>bdp()</code>, <code>bdh()</code> or <code>bds()</code> functions. For example,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">fieldSearch</span>(<span class="st">&quot;vwap&quot;</span>)</code></pre></div>
+<p>search for fields describing volume-weighted average price fields</p>
+</div>
+<div id="beqs-bloomberg-eqs-queries" class="section level3">
+<h3>beqs: Bloomberg EQS Queries</h3>
+<p>The <code>beqs()</code> function (which was contribued by Rademeyer Vermaak) can access EQS functionality:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">beqs</span>(<span class="st">&quot;Global Oil Companies YTD Return&quot;</span>,<span class="st">&quot;GLOBAL&quot;</span>)</code></pre></div>
+</div>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2>Acknowledgements</h2>
+<p>Most valuable contributions from both <a href="https://github.com/jrowen">Jonathan Owen</a> (who kick-started builds on Windows when we considered these to be impossible) and <a href="https://jeroenooms.github.io/">Jeroen Ooms</a> (who took care of builds on OS X) are gratefully acknowledged.</p>
+</div>
+<div id="legal" class="section level2">
+<h2>Legal</h2>
+<p>All trademarks and registered trademarks are the property of their respective owners.</p>
+<p>All code of the <a href="https://github.com/Rblp/Rblpapi">Rblpapi package</a> (ie directories <code>src/</code>, <code>R/</code>, …) is released under the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPL-3</a>.</p>
+<p>All code retrieved from the <a href="https://github.com/Rblp/blp">blp</a> repository during build is released by Bloomberg, available at the <a href="http://www.bloomberglabs.com/api/libraries/">BloombergLabs API</a> site and released under the license included below.</p>
+<pre><code>Copyright 2012. Bloomberg Finance L.P.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this proprietary software and associated documentation files (the &quot;Software&quot;),
+to use, publish, or distribute copies of the Software, and to permit persons to
+whom the Software is furnished to do so.
+
+Any other use, including modifying, adapting, reverse engineering, decompiling,
+or disassembling, is not permitted.
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.</code></pre>
+</div>
+
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

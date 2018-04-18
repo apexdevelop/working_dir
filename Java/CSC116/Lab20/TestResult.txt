@@ -1,0 +1,76 @@
+Yans-MBP:Lab20 yanyan$ java RationalNumberClient
+
+quarter: 1/4
+
+Negative quarter: 1/-4
+
+twoOverEight: 1/4
+
+third: 1/3
+
+half: 1/2
+
+Reduction - equals            quarter.equals(twoOverEight)                                PASS  true                                      true                                      
+
+Unequal                       quarter.equals(third)                                       PASS  false                                     false                                     
+
+Unequal                       quarter.equals(half)                                        PASS  false                                     false                                     
+
+denominator:4
+other.denominator:4
+greatdenom:16
+Add 1/4 and 2/8               quarter.add(twoOverEight)                                   PASS  1/2                                       1/2                                       
+
+denominator:2
+other.denominator:4
+greatdenom:8
+Subtract 1/4 and 2/8          quarter.subtract(twoOverEight)                              FAIL  0                                         1/4                                       
+
+Multiply 1/4 and 2/8          quarter.multiply(twoOverEight)                              PASS  1/16                                      1/16                                      
+
+Divide 1/4 and 2/8            quarter.divide(twoOverEight)                                FAIL  1                                         1/4                                       
+
+denominator:-4
+other.denominator:4
+greatdenom:-16
+Add -1/4 and 2/8              quarterNeg.add(twoOverEight)                                PASS  0                                         0/-1                                      
+
+denominator:-1
+other.denominator:4
+greatdenom:-4
+Subtract -1/4 and 2/8         quarterNeg.subtract(twoOverEight)                           FAIL  1/-2                                      1/-4                                      
+
+
+Multiply -1/4 and 2/8         quarterNeg.multiply(twoOverEight)                           PASS  -1/16                                     1/-16                                     
+
+Divide -1/4 and 2/8           quarterNeg.divide(twoOverEight)                             FAIL  -1                                        1/-4                                      
+
+denominator:4
+other.denominator:3
+greatdenom:12
+Add 1/4 and 1/3               quarter.add(third)                                          PASS  7/12                                      7/12                                      
+
+denominator:12
+other.denominator:3
+greatdenom:36
+Subtract 1/4 and 1/3          quarter.subtract(third)                                     FAIL  -1/12                                     1/4                                       
+
+Multiply 1/4 and 1/3          quarter.multiply(third)                                     PASS  1/12                                      1/12                                      
+
+Divide 1/4 and 1/3            quarter.divide(third)                                       FAIL  3/4                                       1/4                                       
+
+denominator:4
+other.denominator:2
+greatdenom:8
+Add 1/4 and 1/2               quarter.add(half)                                           PASS  3/4                                       3/4                                       
+
+denominator:4
+other.denominator:2
+greatdenom:8
+Subtract 1/4 and 1/2          quarter.subtract(half)                                      FAIL  -1/4                                      1/4                                       
+
+Multiply 1/4 and 1/2          quarter.multiply(half)                                      PASS  1/8                                       1/8                                       
+
+Divide 1/4 and 1/2            quarter.divide(half)                                        FAIL  1/2                                       1/4                                       
+
+  11 /   19 passing tests

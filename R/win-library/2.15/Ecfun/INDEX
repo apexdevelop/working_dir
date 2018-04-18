@@ -1,0 +1,73 @@
+Arrows                  Draw arrows between pairs of points.
+BoxCox                  Box-Cox power transformation and its inverse
+Interp                  Interpolate between numbers or numbers of
+                        characters
+Ping                    ping a Uniform resource locator (URL)
+UShouse.senate          Create a list of members of the US House and
+                        Senate
+USsenateClass           Election Class given state and surname of a US
+                        Senator
+as.Date1970             Date from a number of days since the start of
+                        1970.
+asNumericDF             Coerce to numeric dropping commas and info
+                        after a blank
+camelParse              Split a character string where a capital letter
+                        follows a lowercase letter
+checkNames              Check and return names
+classIndex              Convert class to an integer 1-8 and vice versa
+compareLengths          Compare the lengths of two objects
+createMessage           Compose a message as a single substring from a
+                        character vector
+createX2matchY          Create X to match Y
+financialCrisisFiles    Files containing financial crisis data
+getElement2             Extract a named element from an object with a
+                        default
+grepNonStandardCharacters
+                        grep for nonstandard characters
+interpChar              Interpolate between numbers or numbers of
+                        characters
+interpPairs             interpolate between pairs of vectors in a list
+match.data.frame        Identify the row of 'y' best matching each row
+                        of 'x'
+matchName               Match surname and givenName in a table
+matchQuote              Match isolated quotes across records
+mergeUShouse.senate     Expand a dataset on some members of the US
+                        Congress to the entire membership
+mergeVote               Merge Roll Call Vote
+missing0                Missing or length 0
+nchar0                  Zero characters or NULL
+parseCommas             Convert character string with Dollar signs and
+                        commas to numerics
+parseDollars            Convert character string with Dollar signs and
+                        commas to numerics
+parseName               Parse surname and given name
+pmatch2                 Value matching or partial matching
+qqnorm2                 Normal Probability Plot with Multiple Symbols
+qqnorm2s                Normal Probability Plot with Multiple Lines and
+                        Multiple Symbols
+rasterImageAdj          rasterImage adjusting to zero distortion
+read.testURLs           Read a file produced by testURLs
+read.transpose          Read a data table in transpose form
+readCookPVI             Read Cook Partisan Voting Index
+readFinancialCrisisFiles
+                        banking crisis data and function to read
+                        financial crisis files
+readNIPA                Read a National Income and Product Accounts
+                        data table
+readUShouse             Read the list of representatives in the United
+                        States House of Representatives
+readUSsenate            Read the list of elected officials in the
+                        United States Senate
+readUSstateAbbreviations
+                        Read a list of abbreviations of states and
+                        territories of the United States
+recode2                 bivariate recode
+strsplit1               Split the first field
+subNonStandardCharacters
+                        sub nonstandard characters with replacement
+subNonStandardNames     sub for nonstandard names
+testURLs                Test URLs for intermittent download problems
+trimImage               Trim zero rows or columns from an object of
+                        class 'Image'.
+truncdist               Truncated distribution
+whichAeqB               Index of a single match

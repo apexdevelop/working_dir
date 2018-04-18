@@ -1,0 +1,3 @@
+YYYYMMDD  Average(F) High(F)  Low(F) Fog/Rain/Snow/Hail/Thunder/Tornado
+20100101	44.2	48	34	100000
+20100102	29.9	48	24.1	000000

@@ -1,0 +1,38 @@
+Acoef                   Coefficient matrices of the lagged endogenous
+                        variables
+BQ                      Estimates a Blanchard-Quah type SVAR
+Bcoef                   Coefficient matrix of an estimated VAR(p)
+Canada                  Canada: Macroeconomic time series
+Phi                     Coefficient matrices of the MA represention
+Psi                     Coefficient matrices of the orthogonalised MA
+                        represention
+SVAR                    Estimation of a SVAR
+SVEC                    Estimation of a SVEC
+VAR                     Estimation of a VAR(p)
+VARselect               Information criteria and FPE for different
+                        VAR(p)
+arch.test               ARCH-LM test
+causality               Causality Analysis
+coef                    Coefficient method for objects of class varest
+fanchart                Fanchart plot for objects of class varprd
+fevd                    Forecast Error Variance Decomposition
+fitted                  Fit method for objects of class varest or
+                        vec2var
+irf                     Impulse response function
+logLik                  Log-Likelihood method
+normality.test          Normality, multivariate skewness and kurtosis
+                        test
+plot.varcheck           Plot methods for objects in vars
+predict                 Predict method for objects of class varest and
+                        vec2var
+residuals               Residuals method for objects of class varest
+                        and vec2var
+restrict                Restricted VAR
+roots                   Eigenvalues of the companion coefficient matrix
+                        of a VAR(p)-process
+serial.test             Test for serially correlated errors
+stability               Structural stability of a VAR(p)
+summary                 Summary method for objects of class varest,
+                        svarest and svecest
+vars-deprecated         Deprecated Functions in package vars
+vec2var                 Transform a VECM to VAR in levels

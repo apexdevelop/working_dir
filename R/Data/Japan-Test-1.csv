@@ -1,0 +1,21 @@
+Estimation results for equation price1.zoo: ,,,,,,
+=========================================== ,,,,,,
+price1.zoo = price1.zoo.l1 + factor1.zoo.l1 + factor2.zoo.l1 + factor3.zoo.l1 + factor4.zoo.l1 + factor5.zoo.l1 + factor6.zoo.l1 + const + trend ,,,,,,
+,,,,,,
+,Estimate,Std. Error,t value,Pr(>|t|),,
+price1.zoo.l1,0.92,0.05,19.01,<2e-16,***,TPTRAN Index
+factor1.zoo.l1,0.02,0.04,0.47,0.64,,USDJPY Curncy
+factor2.zoo.l1,-0.09,0.08,-1.24,0.22,,USGG10YR Index
+factor3.zoo.l1,0.10,0.07,1.35,0.18,,GJGB10 Index
+factor4.zoo.l1,-0.06,0.05,-1.41,0.16,,GJGB2 Index
+factor5.zoo.l1,-0.01,0.03,-0.53,0.59,,M2% YOY Index
+factor6.zoo.l1,-0.06,0.03,-2.07,0.04,*,JMNSM2Y Index
+const,0.00,0.17,-0.02,0.98,,
+trend,0.00,0.00,0.13,0.89,,
+---,,,,,,
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 ,,,,,,
+,,,,,,
+,,,,,,
+Residual standard error: 0.262 on 148 degrees of freedom,,,,,,
+"Multiple R-Squared: 0.935,      Adjusted R-squared: 0.931 ",,,,,,
+"F-statistic:  265 on 8 and 148 DF,  p-value: <2e-16 ",,,,,,

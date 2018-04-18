@@ -1,0 +1,9 @@
+BasicAmericanOptions    Valuation of Basic American Options
+BinomialTreeOptions     Binomial Tree Option Model
+HestonNandiGarchFit     Heston-Nandi Garch(1,1) Modelling
+HestonNandiOptions      Option Price for the Heston-Nandi Garch Option
+                        Model
+LowDiscrepancy          Low Discrepancy Sequences
+MonteCarloOptions       Monte Carlo Valuation of Options
+PlainVanillaOptions     Valuation of Plain Vanilla Options
+fOptions-package        Basic Option Valuation

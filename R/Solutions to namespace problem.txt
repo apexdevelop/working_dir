@@ -1,0 +1,13 @@
+The maintainers of the package need to update the package to include a NAMESPACE file.
+
+That said, you might have luck inserting the NAMESPACE file yourself as a hack. It looks like ASReml is closed source, but you have the .zip file. Try unzipping it. Then, create a simple text file containing:
+
+exportPattern("^[^\\.]")
+Save it as NAMESPACE (be careful that there is no extension like .txt, Windows sometimes sneaks these in). Place NAMESPACE in the top folder of the unzipped package (should be something like asreml.d/; there will also be a DESCRIPTION file there). If there is an MD5 file, you should probably delete it. Now, re-zip the asreml.d/ directory. See if the new zip file works.
+
+For more on NAMESPACE, see http://cran.r-project.org/doc/manuals/R-exts.html#Package-namespaces .
+
+NB This might be bad advice. But it seems like it would work. It won't hurt anything.
+
+
+Change file MD5 into NAMESPACE

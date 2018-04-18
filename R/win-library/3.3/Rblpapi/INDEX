@@ -1,0 +1,21 @@
+bdh                     Run 'Bloomberg Data History' Queries
+bdp                     Run 'Bloomberg Data Point' Queries
+bds                     Run 'Bloomberg Data Set' Queries
+beqs                    Run 'Bloomberg EQS' Queries
+blpAuthenticate         Authenticate Bloomberg API access
+blpConnect              Establish connection to Bloomberg service
+blpDisconnect           Placeholder function for disconnection from
+                        Bloomberg
+bsrch                   Run 'Bloomberg SRCH' Queries
+defaultConnection       Return the default connection object
+fieldInfo               Run 'Bloomberg Field Data' Queries
+fieldSearch             Search for matching data fields
+getBars                 Get Open/High/Low/Close/Volume Bars from
+                        Bloomberg
+getHeaderVersion        Get Bloomberg library header version
+getMultipleTicks        Get Multiple Ticks from Bloomberg
+getPortfolio            Run 'Portfolio Data' Queries
+getRuntimeVersion       Get Bloomberg library run-time version
+getTicks                Get Ticks from Bloomberg
+lookupSecurity          Look up symbol from Bloomberg
+subscribe               Subscribe to streaming market data

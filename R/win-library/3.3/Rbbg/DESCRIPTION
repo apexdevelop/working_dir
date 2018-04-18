@@ -1,0 +1,12 @@
+Package: Rbbg
+Version: 0.6.1
+Date: 2015-10-21
+Title: R/bbg
+Author: Robert Sams <rmsams@gmail.com>, Ana Nelson <ana@ananelson.com>
+Maintainer: John Laing <john.laing@gmail.com>
+Description: Fetch data from financial data provider nicknamed bbg
+License: GPL
+Depends: rJava
+Suggests: zoo
+OS_type: windows
+Built: R 3.3.2; ; 2016-12-28 18:27:04 UTC; windows
