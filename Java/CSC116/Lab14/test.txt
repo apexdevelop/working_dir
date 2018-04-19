@@ -1,5 +1,0 @@
-Students are often asked to write term papers containing a certain number of words. Counting words 
-in a long paper is a tedious task, but the computer can help. Write a program that counts the number
-of words, lines, and total characters (not including whitespace) in a paper, assuming that 
-consecutive words are separated either by spaces or end-of-line characters. Your program should be 
-named WordCount.java.

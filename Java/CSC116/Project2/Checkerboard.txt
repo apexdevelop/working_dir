@@ -1,3 +1,0 @@
-+--------------------------main--------------------+
-|(if col % 2 == row %2)                 (otherwise)|
-drawFilledSquare                         drawSquare
