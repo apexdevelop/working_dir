@@ -1,13 +1,11 @@
 %remember to clear trades on 'factor_result_unfilter.xlsx' and 'factor_result_filter.xlsx'
 clearvars;
+javaaddpath('C:/Users/YChen/Documents/git/working_dir/Matlab/blpapi3.jar');
 home_dir = getuserdir();
-java_dir = strcat(home_dir,'/git/working_dir/Matlab/blpapi3.jar');
-javaaddpath(java_dir);
-data_dir = strcat(home_dir,'/git/working_dir/Matlab/Data/factor/single_factor');
+data_dir = strcat(home_dir
 start_sh_idx=1;
 end_sh_idx=1;
-%cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
-cd(data_dir);
+cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 filename1='factors_v2.xlsx';
 filename2a='factor_result_unfilter.xlsx';
 filename2b='factor_result_filter.xlsx';
@@ -81,7 +79,7 @@ mat_zfpx=zeros(size(txt2,1),1);
 mat_factor=zeros(size(txt2,1),1); %5day mov rtn
 mat_zfactor=zeros(size(txt2,1),1); %zscore 5day mov rtn
 
-cd(data_dir);
+cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 S_signal=load(strcat('op_signal', num2str(sh_idx)));
 S_causal=load(strcat('op_causal', num2str(sh_idx)));
 S_ret=load(strcat('op_ret', num2str(sh_idx)));
@@ -298,7 +296,7 @@ toc
 excel_date=m2xdate(date(M+1:end));
 fchg_mat=[mat_frtn mat_zfrtn mat_factor mat_zfactor mat_zfpx];
 
-cd(data_dir);
+cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 xlswrite(filename1,fchg_mat,shname,char(fchg_ranges(sh_idx))); %factor change
 xlswrite(filename2a,Names,shname,'a2'); %Names
 xlswrite(filename2a,Metrics,shname,'d2'); %trades
