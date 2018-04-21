@@ -1,3 +1,4 @@
+package coreMath;
 import java.lang.Math;
 import java.util.*;
 import java.io.*;

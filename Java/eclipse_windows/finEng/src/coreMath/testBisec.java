@@ -1,3 +1,4 @@
+package coreMath;
 
 public class testBisec extends IntervalBisection {
     

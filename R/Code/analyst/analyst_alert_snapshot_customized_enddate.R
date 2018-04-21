@@ -227,12 +227,14 @@ for (i in 1:num_ob) {
        float_tp = as.numeric(str_tp)
        out_newtp[i] = float_tp
        ##under event of target price change, better to use snapshot new target price to calculate chg_tgt
+       if (!is.na(out_newtp[i]) && !is.na(out_oldtp[i])>0){
        if (out_newtp[i]!=out_oldtp[i]) {
          chg_tgt[i] = (out_newtp[i] - out_oldtp[i])/out_oldtp[i]*100
        } else {
          ##sometimes the 2nd_last field info already updated, so has to go futher in the past to get the old tgt px
          chg_tgt[i] = (out_newtp[i] - out_oldertp[i])/out_oldertp[i]*100
          out_oldtp_px[i] = (out_oldertp[i]/out_px[i]-1)*100
+       }
        }
        out_newtp_px[i] = (out_newtp[i]/out_px[i]-1)*100
        out_newtp_avgtp[i] = (out_newtp[i] /out_avgtp[i]-1)*100
@@ -361,7 +363,7 @@ df.output=as.data.frame(output)
 colnames(df.output)=c("time","event","date","broker","name","is_forced","newtp_to_px","oldtp_to_px","chg_tgt","newtp_avgtp","chg_2d","chg_5d","char_newrating","newrating","oldrating","chg_rating","score")
 
 
-file_name3=paste("test_analyst_output_",str_current_date2,".csv",sep="")
+file_name3=paste("customized_analyst_output_",str_current_date2,".csv",sep="")
 file_dir3=paste(pathname,file_name3,sep="")
 write.csv(df.output, file_dir3)
 
