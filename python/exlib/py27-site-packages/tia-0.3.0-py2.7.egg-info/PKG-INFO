@@ -1,0 +1,24 @@
+Metadata-Version: 1.1
+Name: tia
+Version: 0.3.0
+Summary: Toolkit for integration and analysis
+Home-page: https://github.com/bpsmith/tia
+Author: Brian P Smith
+Author-email: brian.p.smith@gmail.com
+License: BSD (3-clause)
+Download-URL: https://github.com/bpsmith/tia
+Description: TIA is a toolkit that provides bloomberg data access, easier pdf generation, backtesting functionality,
+        technical analysis functionality, and return analysis.
+        
+Keywords: bloomberg,backtesting,technical analysis,pdf
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: Intended Audience :: Financial and Insurance Industry
+Classifier: License :: OSI Approved :: BSD License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Topic :: Office/Business :: Financial
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Classifier: Topic :: Utilities

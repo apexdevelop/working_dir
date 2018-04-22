@@ -1,0 +1,19 @@
+Metadata-Version: 2.0
+Name: eikon
+Version: 0.1.11
+Summary: Python package for retrieving Eikon data.
+Home-page: https://developers.thomsonreuters.com/tr-eikon-scripting-apis/python-thin-library-pyeikon/
+Author: Thomson Reuters
+Author-email: UNKNOWN
+License: LICENSE
+Platform: UNKNOWN
+Requires-Dist: requests
+Requires-Dist: datetime
+Requires-Dist: pandas (>=0.17.0)
+Requires-Dist: appdirs
+Requires-Dist: python-dateutil
+Requires-Dist: websocket-client
+
+Python package for retrieving Eikon data.
+
+

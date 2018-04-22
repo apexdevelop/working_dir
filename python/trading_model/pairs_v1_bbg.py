@@ -11,9 +11,14 @@ import statsmodels.api as sm
 import statsmodels.tsa.stattools as ts
 import pandas as pd
 import scipy.stats as sc
+from os.path import expanduser
+home = expanduser("~")
+
 #add additional module path for Bloomberg
 import sys
-sys.path.append('C:\Python27\lib\site-packages')
+#sys.path.append('C:\Python27\lib\site-packages')
+bbg_path = home + 'Documents\git\working_dir\python\exlib\python27-site-packages'
+sys.path.append(bbg_path)
 import tia.bbg.datamgr as dm
 
 def coint_datafeed(path,field,startdate,enddate,period,curr):
@@ -236,8 +241,8 @@ def trade_decision(signal_TH,hp_TH,prices,m,numOfCol,adj_day,zscr,v_h):
     return exp_ret, exp_vol, winp, omega, exp_hp, trades
 
 def main():
-    from os.path import expanduser
-    home = expanduser("~")
+    #from os.path import expanduser
+    #home = expanduser("~")
     directory = home + '/Documents/git/working_dir/python/data/'
     #directory='C:/Users/YChen/Documents/git/working_dir/python/data/'
     file_name = 'coint_universe_single.csv'
