@@ -132,7 +132,7 @@ for i in range(n_ob):
 #out_df4 = pd.merge(out_df2,out_df3,right_index=True, left_index=True)
 #out_df5 = pd.merge(out_df4,df_new_rating,right_index=True, left_index=True)
 outpath='C:/Users/YChen/Documents/git/working_dir/python/data/'
-outfile_name = 'test_analyst_output_'+current_date2+'.xlsx'
+outfile_name = 'python_analyst_output_'+current_date2+'.xlsx'
 fullpath=outpath+outfile_name
 out_df.to_excel(fullpath,index=False)
 #csv = np.savetxt(path,arr,delimiter=',')
