@@ -26,7 +26,7 @@ current_date2=current_datetime.strftime("%m%d%Y")
 #path='C:/Users/YChen/Documents/git/working_dir/python/data/'
 file_name = 'analyst_alert_'+current_date2+'.xlsx'
 fullpath=path+file_name
-indf = pd.read_excel(fullpath, sheetname='Worksheet')
+indf = pd.read_excel(fullpath, sheet_name='Worksheet')
 dims=indf.shape
 n_ob=dims[0]
 indf_time=indf.iloc[:,1]
@@ -139,7 +139,7 @@ for i in range(n_ob):
 
 #outpath='C:/Users/YChen/Documents/git/working_dir/python/data/'
 outpath=home + '/Documents/git/working_dir/python/data/'
-outfile_name = 'python_analyst_output_'+current_date2+'.xlsx'
+outfile_name = 'chung_analyst_output_'+current_date2+'.xlsx'
 fullpath=outpath+outfile_name
 out_df.to_excel(fullpath,index=False)
 #csv = np.savetxt(path,arr,delimiter=',')
