@@ -3,7 +3,9 @@ start_time=Sys.time()
 # securities=c("005930 KS EQUITY","AA Equity")
 # file_name1="universe_earnings.csv"
 
-pathname="C:/Users/YChen/Documents/git/working_dir/R/Data/"
+home = path.expand("~") #which is "C:/Users/YChen/Documents"
+#pathname="C:/Users/YChen/Documents/git/working_dir/R/Data/"
+pathname=paste(home,"git/working_dir/R/Data/",sep="")
 file_name1="analyst_ticker_s.csv"
 file_dir1=paste(pathname,file_name1,sep="")
 securities = read.csv(file_dir1,header = FALSE)
