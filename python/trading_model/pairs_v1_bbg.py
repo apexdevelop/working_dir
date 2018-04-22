@@ -235,8 +235,11 @@ def trade_decision(signal_TH,hp_TH,prices,m,numOfCol,adj_day,zscr,v_h):
         exp_hp = -99999            
     return exp_ret, exp_vol, winp, omega, exp_hp, trades
 
-#def main():
-    directory='C:/Users/YChen/Documents/git/working_dir/python/data/'
+def main():
+    from os.path import expanduser
+    home = expanduser("~")
+    directory = home + '/Documents/git/working_dir/python/data/'
+    #directory='C:/Users/YChen/Documents/git/working_dir/python/data/'
     file_name = 'coint_universe_single.csv'
     path=directory+file_name
     #generate data from Bloomberg
@@ -310,11 +313,12 @@ def trade_decision(signal_TH,hp_TH,prices,m,numOfCol,adj_day,zscr,v_h):
     ## calculate performance statistics
     if not is_adf:
         v_h = np.ones((numOfOb,1))
-    exp_ret, exp_vol, winp, omega, exp_hp, trades = trade_decision(signal_TH,hp_TH,row_logpx,m,numOfCol,adj_day,zscr,v_h)
+    exp_ret, exp_vol, winp, omega, exp_hp, trades = trade_decision(signal_TH,hp_TH,row_logpx,m,numOfOb,adj_day,zscr,v_h)
     #save the result
     result = [exp_ret,exp_vol,winp,omega,exp_hp,trades,v_Beta.item(-1),v_ADF.item(-1)]
-    saveFile('C:\\Users\\YChen\\Documents\\git\\working_dir\\python\\Cointegration_output_v1.csv',result)
-            
+    outpath=home + '/Documents/git/working_dir/python/Cointegration_output_v1.csv'
+    #saveFile('C:\\Users\\YChen\\Documents\\git\\working_dir\\python\\Cointegration_output_v1.csv',result)
+    saveFile(outpath,result)        
 #run model            
 main()
 
