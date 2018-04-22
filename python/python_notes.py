@@ -46,7 +46,15 @@ To get the current working directory use
 import os
 os.getcwd()
 
+https://stackoverflow.com/questions/4028904/how-to-get-the-home-directory-in-python
+To get home directory in path
+from os.path import expanduser
+home = expanduser("~")
 
+If you're on Python 3.5+ you can use pathlib.Path.home():
+from pathlib import Path
+home = str(Path.home())    
+    
 os.chdir("C:\Users\YChen\Documents\git\working_dir\python")
 Change the current working directory to path. Availability: Unix, Windows.
 

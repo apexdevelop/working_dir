@@ -14,11 +14,16 @@ import pandas as pd
 import numpy as np
 from datetime import datetime
 
+from os.path import expanduser
+home = expanduser("~")
+#path = os.path.join(home, '/Documents/git/working_dir/python/data/')
+path = home + '/Documents/git/working_dir/python/data/'
+
 current_datetime=datetime.now()
 current_date=current_datetime.strftime("%m/%d/%Y")
 current_date2=current_datetime.strftime("%m%d%Y")
 
-path='C:/Users/YChen/Documents/git/working_dir/python/data/'
+#path='C:/Users/YChen/Documents/git/working_dir/python/data/'
 file_name = 'analyst_alert_'+current_date2+'.xlsx'
 fullpath=path+file_name
 indf = pd.read_excel(fullpath, sheetname='Worksheet')
@@ -131,7 +136,9 @@ for i in range(n_ob):
 #out_df3 = pd.merge(df_broker,df_new_tp,right_index=True, left_index=True)
 #out_df4 = pd.merge(out_df2,out_df3,right_index=True, left_index=True)
 #out_df5 = pd.merge(out_df4,df_new_rating,right_index=True, left_index=True)
-outpath='C:/Users/YChen/Documents/git/working_dir/python/data/'
+
+#outpath='C:/Users/YChen/Documents/git/working_dir/python/data/'
+outpath=home + '/Documents/git/working_dir/python/data/'
 outfile_name = 'python_analyst_output_'+current_date2+'.xlsx'
 fullpath=outpath+outfile_name
 out_df.to_excel(fullpath,index=False)
