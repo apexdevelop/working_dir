@@ -47,10 +47,13 @@ def processMessage(msg):
         for field in dataPoint.elements():
             if not field.isValid():
                 print field.name(), " is NULL."
-            elif field.isArray:
+            #elif field.isArray:
+            elif field.isArray():
                 #The following illustrates how to iterate over complex data returns.
                 for i, row in enumerate(field.values()):
                     print "Row %d: %s" % (i,row)
+                    #print field.name()
+                print type(field)
             else:
                 print "%s = %s" % (field.name(), field.getValueAsString())
         print ""
