@@ -15,11 +15,9 @@ from os.path import expanduser
 home = expanduser("~")
 
 #add additional module path for Bloomberg
-import sys
-#sys.path.append('C:\Python27\lib\site-packages')
-bbg_path = 'C:\Python27\lib\site-packages'
-#bbg_path = home + '\Documents\git\working_dir\python\exlib\python27-site-packages'
-sys.path.append(bbg_path)
+#import sys
+#bbg_path = 'C:\Python27\lib\site-packages'
+#sys.path.append(bbg_path)
 import tia.bbg.datamgr as dm
 
 def coint_datafeed(path,field,startdate,enddate,period,curr):
