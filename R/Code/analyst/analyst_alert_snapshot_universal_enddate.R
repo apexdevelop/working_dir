@@ -5,7 +5,9 @@ current_time=Sys.time()
 current_date=Sys.Date()
 str_current_date2=format(current_date,'%m%d%Y')
 
-pathname="C:/Users/YChen/Documents/git/working_dir/R/Data/"
+home = path.expand("~") #which is "C:/Users/YChen/Documents"
+pathname=paste(home,"/git/working_dir/R/Data/",sep="")
+#pathname="C:/Users/YChen/Documents/git/working_dir/R/Data/"
 #file_name1=paste("analyst_alert_",str_current_date2,".csv",sep="")
 file_name1=paste("analyst_alert_",str_current_date2,".xlsx",sep="")
 file_dir1=paste(pathname,file_name1,sep="")

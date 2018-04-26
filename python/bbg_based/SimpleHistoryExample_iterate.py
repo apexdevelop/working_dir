@@ -36,8 +36,15 @@ def parseCmdLine():
     
 def processMessage(msg):
     securityData = msg.getElement(SECURITY_DATA)
-    print securityData.getElementAsString(SECURITY)
+    sec_name = securityData.getElementAsString(SECURITY)
+    #print securityData.getElementAsString(SECURITY)
+    print sec_name
     fieldData = securityData.getElement(FIELD_DATA)
+    
+    date = list()
+    
+    count_nob = 0
+    
     for dataPoint in fieldData.values():
         for field in dataPoint.elements():
             if not field.isValid():
@@ -47,14 +54,18 @@ def processMessage(msg):
                 for i, row in enumerate(field.values()):
                     print "Row %d: %s" % (i, row)
             else:
+                if field.name()=="date":
+                   date.append(field.getValueAsString())
                 print "%s = %s" % (field.name(), field.getValueAsString())
         print ""
-
+        count_nob = count_nob + 1
+        
     fieldExceptionArray = securityData.getElement(FIELD_EXCEPTIONS)
     for fieldException in fieldExceptionArray.values():
         errorInfo = fieldException.getElement(ERROR_INFO)
         print "%s: %s" % (errorInfo.getElementAsString("category"),
                           fieldException.getElementAsString(FIELD_ID))
+    return date
 
 def main():
     options = parseCmdLine()
@@ -106,15 +117,20 @@ def main():
                 # Process the response generically.
                 #print msg
                 if ev.eventType() == blpapi.Event.PARTIAL_RESPONSE or ev.eventType() == blpapi.Event.RESPONSE:
-                    processMessage(msg)
-
+                    result = processMessage(msg)
+                    #print result
+                    
+                    for x in result:
+                      print x
+                    
             if ev.eventType() == blpapi.Event.RESPONSE:
                 # Response completely received, so we could exit
                 break
     finally:
         # Stop the session
         session.stop()
-        
+
+       
 if __name__ == "__main__":
     print "SimpleHistoryExample"
     try:
