@@ -1,7 +1,10 @@
 # setwd("C:/Users/ychen/Documents/R/Data")
 # securities=c("005930 KS EQUITY","AA Equity")
 # file_name1="universe_earnings.csv"
-pathname="./Data/"
+#pathname="./Data/"
+home = path.expand("~") #which is "C:/Users/YChen/Documents"
+pathname=paste(home,"/git/working_dir/R/Data/",sep="")
+
 file_name1="analyst_ticker_s.csv"
 file_dir1=paste(pathname,file_name1,sep="")
 securities = read.csv(file_dir1,header = FALSE)
@@ -10,7 +13,7 @@ num_sec=dim(securities)[1]
 securities=as.matrix(securities)
 # securities=sort(securities)
 
-file_name2="broker.csv"
+file_name2="broker_s.csv"
 file_dir2=paste(pathname,file_name2,sep="")
 brokers = read.csv(file_dir2,header = FALSE)
 num_brokers=dim(brokers)[1]

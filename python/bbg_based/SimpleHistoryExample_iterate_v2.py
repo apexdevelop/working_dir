@@ -14,7 +14,9 @@ path = home + '/Documents/git/working_dir/python/data/iterate_test.xlsx'
 
 import pandas as pd
 import numpy as np
-out_df= pd.DataFrame(columns=['Date','PX_LAST','OPEN'],index = range(1,101))
+field_names = ('date','BEST_ANALYST_RATING')
+out_df= pd.DataFrame(columns=field_names,index = range(1,101))
+
 
 SECURITY_DATA = blpapi.Name("securityData")
 SECURITY = blpapi.Name("security")
@@ -24,7 +26,7 @@ FIELD_ID = blpapi.Name("fieldId")
 ERROR_INFO = blpapi.Name("errorInfo")
 
 def parseCmdLine():
-    parser = OptionParser(description="Retrieve reference data.")
+    parser = OptionParser(description="Retrieve Historical data.")
     parser.add_option("-a",
                       "--ip",
                       dest="host",
@@ -49,8 +51,6 @@ def processMessage(msg):
     print sec_name
     fieldData = securityData.getElement(FIELD_DATA)
     
-    #date = list()
-    
     count_nob = 0
     
     for dataPoint in fieldData.values():
@@ -62,15 +62,11 @@ def processMessage(msg):
                 for i, row in enumerate(field.values()):
                     print "Row %d: %s" % (i, row)
             else:
-                if field.name()=="date":
-                   #date.append(field.getValueAsString())
+                if field.name()==field_names[0]:
                    out_df.iloc[count_nob,0]=field.getValueAsString()
-                if field.name()=="PX_LAST":
+                if field.name()==field_names[1]:
                    out_df.iloc[count_nob,1]=field.getValueAsString()
-                if field.name()=="OPEN":
-                   out_df.iloc[count_nob,2]=field.getValueAsString()
-                print "%s = %s" % (field.name(), field.getValueAsString())
-        print ""
+            
         count_nob = count_nob + 1
         
     fieldExceptionArray = securityData.getElement(FIELD_EXCEPTIONS)
@@ -108,16 +104,29 @@ def main():
 
         # Create and fill the request for the historical data
         request = refDataService.createRequest("HistoricalDataRequest")
-        request.getElement("securities").appendValue("IBM US Equity")
-        request.getElement("securities").appendValue("MSFT US Equity")
-        request.getElement("fields").appendValue("PX_LAST")
-        request.getElement("fields").appendValue("OPEN")
+        request.getElement("securities").appendValue("9984 JP Equity")
+        request.getElement("fields").appendValue(field_names[1])
+        #request.getElement("fields").appendValue(field_names[2])
         request.set("periodicityAdjustment", "ACTUAL")
-        request.set("periodicitySelection", "MONTHLY")
-        request.set("startDate", "20180101")
+        request.set("periodicitySelection", "DAILY")
+        request.set("startDate", "20150101")
         request.set("endDate", "20180331")
         request.set("maxDataPoints", 100)
-
+        
+        # add overrides
+        overrideField="BEST_DATA_SOURCE_OVERRIDE"
+        #overrideValues=['BST','GSR']
+        overrideValues='HSB'
+        overrides = request.getElement("overrides")
+        override = overrides.appendElement()
+        override.setElement('fieldId', overrideField)
+        override.setElement('value', overrideValues)
+        '''
+        for overrideValue in overrideValues:
+            override = overrides.appendElement()
+            override.setElement('fieldId', overrideField)
+            override.setElement('value', overrideValue)
+        '''
         print "Sending Request:", request
         # Send the request
         session.sendRequest(request)

@@ -1,3 +1,7 @@
+#pathname="C:/Users/YChen/Documents/git/working_dir/R/Data/"
+home = path.expand("~") #which is "C:/Users/YChen/Documents"
+pathname=paste(home,"/git/working_dir/R/Data/",sep="")
+
 library(Rblpapi)
 con=blpConnect()
 tz = "America/New_York"
@@ -121,7 +125,7 @@ df.security.5=as.data.frame(security.5)
 colnames(df.security.5)="security.5"
 out.df=cbind(df.intraday.1,df.interday.1,df.security.1,df.intraday.5,df.interday.5,df.security.5)
 
-pathname="C:/Users/YChen/Documents/git/working_dir/R/Data/"
+
 
 str_current_date=format(current.date,'%m%d%Y')
 

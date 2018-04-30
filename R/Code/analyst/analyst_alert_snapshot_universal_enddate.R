@@ -1,5 +1,6 @@
 #####
 ##field data for some stocks update timely, others not, that's why have to use both universal and customized enddate
+
 library(xlsx)
 current_time=Sys.time()
 current_date=Sys.Date()
@@ -46,7 +47,7 @@ for (i in 1:num_ob) {
 }
 
 library(Rbbg)
-conn1=blpConnect()
+conn1=blpConnect(blpapi.jar.file="C:\\blp\\DAPI\\APIv3\\JavaAPI\\v3.10.1.1\\lib\\blpapi3.jar")
 g_fields=c("SHORT_NAME","PX_LAST","BEST_TARGET_PRICE","CHG_PCT_2D","CHG_PCT_5D","REL_INDEX")
 x_p=bdp(conn1,col_ticker,g_fields)
 out_name=as.matrix(x_p[,1])
@@ -269,6 +270,9 @@ for (i in 1:num_ob) {
       str_newrating = substr(new_condition,rating_idx+9,temp_idx-2)
       out_newrating[i] = str_newrating
       #if field rating doesn't match with news, go to the past further
+      #if news came before market, new rating and tgt today is the same with yesterday, so latest field info and news don't match
+      #but there is another case that news came after market, and field info has not yet been updated, then the output will be wrong
+      if (!is.na(chg_rating[i])) {
       if (chg_rating[i]==0){
         out_newrating_numeric[i]=out_oldrating_numeric[i]
         out_oldrating_numeric[i]=out_olderrating_numeric[i]
@@ -279,6 +283,7 @@ for (i in 1:num_ob) {
         out_oldtp_px[i] = (out_oldertp[i]/out_px[i]-1)*100
         out_newtp_px[i] = (out_newtp[i]/out_px[i]-1)*100
         out_newtp_avgtp[i] = (out_newtp[i] /out_avgtp[i]-1)*100
+      }
       }
       
     } else if (grepl("Initiated", new_condition)) {
