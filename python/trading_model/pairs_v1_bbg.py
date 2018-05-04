@@ -8,7 +8,7 @@ optimization function in Python
 
 import numpy as np
 import statsmodels.api as sm
-import statsmodels.tsa.stattools as ts
+#import statsmodels.tsa.stattools as ts
 import pandas as pd
 import scipy.stats as sc
 from os.path import expanduser

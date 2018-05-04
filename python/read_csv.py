@@ -1,5 +1,7 @@
 #there are several ways to read data from csv
-path='C:/Users/YChen/Documents/git/working_dir/python/'
+from os.path import expanduser
+home = expanduser("~")
+path=home + '/Documents/git/working_dir/python/data/'
 file_name = 'oil_universe.csv'
 fullpath=path+file_name
 

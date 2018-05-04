@@ -8,10 +8,14 @@ sh_idx=1;
 startdate='2012/3/12';
 % enddate=today();
 % enddate='2017/5/21';
-enddate='2018/2/28';
-
-javaaddpath('C:\blp\DAPI\APIv3\JavaAPI\v3.10.1.1\lib\blpapi3.jar');
-cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
+enddate='2018/3/30';
+home_dir = getuserdir();
+java_dir = strcat(home_dir,'/git/working_dir/Matlab/blpapi3.jar');
+javaaddpath(java_dir);
+% javaaddpath('C:\blp\DAPI\APIv3\JavaAPI\v3.10.1.1\lib\blpapi3.jar');
+data_dir = strcat(home_dir,'/git/working_dir/Matlab/Data/factor/single_factor');
+cd(data_dir);
+% cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 filename='factors_v2.xlsx';
 % 1-oil,2-shipping,3-utility,4-hitachi,5-steel,6-coal,7-display,8-solar,9-jp_bond,10-kr_bond,11-aluminum1,12-aluminum2,13-aluminum3,14-machinery,15-fullfactor
 v_shnames={'oil','shipping','utility','hitachi','steel','coal','display','solar','jp_bond','kr_bond','aluminum1','aluminum2','aluminum3','machinery','fullfactor'};
@@ -287,7 +291,8 @@ end
 toc
 excel_date=m2xdate(date(M+1:end));
 output_mat=[mat_frtn mat_zfrtn mat_factor mat_zfactor mat_zfpx];
-cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
+cd(data_dir);
+% cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 save (strcat('op_signal', num2str(sh_idx)), 'c_opti_zfactor');
 save (strcat('op_causal', num2str(sh_idx)), 'c_opti_causal');
 save (strcat('op_ret', num2str(sh_idx)), 'c_opti_ret');

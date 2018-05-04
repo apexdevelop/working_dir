@@ -48,12 +48,13 @@ def processMessage(msg):
     securityData = msg.getElement(SECURITY_DATA)
     sec_name = securityData.getElementAsString(SECURITY)
     #print securityData.getElementAsString(SECURITY)
-    print sec_name
+    #print sec_name
     fieldData = securityData.getElement(FIELD_DATA)
     
     count_nob = 0
     
     for dataPoint in fieldData.values():
+        #print dataPoint
         for field in dataPoint.elements():
             if not field.isValid():
                 print field.name(), "is NULL."
@@ -74,7 +75,7 @@ def processMessage(msg):
         errorInfo = fieldException.getElement(ERROR_INFO)
         print "%s: %s" % (errorInfo.getElementAsString("category"),
                           fieldException.getElementAsString(FIELD_ID))
-    return out_df
+    return out_df,count_nob
 
 def main():
     options = parseCmdLine()
@@ -105,6 +106,7 @@ def main():
         # Create and fill the request for the historical data
         request = refDataService.createRequest("HistoricalDataRequest")
         request.getElement("securities").appendValue("9984 JP Equity")
+        #request.getElement("securities").appendValue("9984 JP Equity")
         request.getElement("fields").appendValue(field_names[1])
         #request.getElement("fields").appendValue(field_names[2])
         request.set("periodicityAdjustment", "ACTUAL")
@@ -115,13 +117,17 @@ def main():
         
         # add overrides
         overrideField="BEST_DATA_SOURCE_OVERRIDE"
-        #overrideValues=['BST','GSR']
-        overrideValues='HSB'
         overrides = request.getElement("overrides")
+        
+        #single override values
+        overrideValues='HSB'
         override = overrides.appendElement()
         override.setElement('fieldId', overrideField)
         override.setElement('value', overrideValues)
+        
         '''
+        #multiple override values
+        overrideValues=['HSB','GSR']
         for overrideValue in overrideValues:
             override = overrides.appendElement()
             override.setElement('fieldId', overrideField)
@@ -139,12 +145,14 @@ def main():
                 # Process the response generically.
                 #print msg
                 if ev.eventType() == blpapi.Event.PARTIAL_RESPONSE or ev.eventType() == blpapi.Event.RESPONSE:
-                    result = processMessage(msg)
-                    
-                    result.to_excel(path,index=False)
+                    result,nob = processMessage(msg)
+                    adj_result=result.iloc[0:nob-1,]
                     #print type(result)
-                    #for x in result:
-                    #  print x
+                    print nob
+                    for index,row in adj_result.iterrows():
+                        print row.iloc[0], row.iloc[1]
+                    
+                    adj_result.to_excel(path,index=False)
                     
             if ev.eventType() == blpapi.Event.RESPONSE:
                 # Response completely received, so we could exit

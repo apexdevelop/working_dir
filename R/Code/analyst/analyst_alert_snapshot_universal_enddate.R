@@ -315,7 +315,7 @@ for (i in 1:num_ob) {
         is_forced[i]="Forced"
       }
     
-      if (out_oldrating_numeric==3 && out_oldtp_px[i]>=15 && out_newtp_px[i]<15){
+      if (out_oldrating_numeric[i]==3 && out_oldtp_px[i]>=15 && out_newtp_px[i]<15){
         is_forced[i]="Forced"
       }
     }

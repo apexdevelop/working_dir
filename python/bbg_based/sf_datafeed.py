@@ -7,7 +7,9 @@ Created on Mon Jan 08 10:34:42 2018
 import pandas as pd
 
 #there are several ways to read data from csv
-path='C:/Users/YChen/Documents/git/working_dir/python/'
+from os.path import expanduser
+home = expanduser("~")
+path=home + '/Documents/git/working_dir/python/data/'
 file_name = 'oil_universe.csv'
 fullpath=path+file_name
 #method 1 using numpy.genfromtxt
@@ -32,8 +34,8 @@ new_arr2=np.delete(arr2,arr_rm)
 
 #generate data from Bloomberg
 #add additional module path
-import sys
-sys.path.append('C:\Python27\lib\site-packages')
+#import sys
+#sys.path.append('C:\Python27\lib\site-packages')
 import tia.bbg.datamgr as dm
 mgr = dm.BbgDataManager()
 
@@ -84,7 +86,12 @@ for i in range(n_equity):
         frames_rtn=[ertn,brtn,frtn]
         raw_df_rtn=pd.concat(frames_rtn,axis=1)
         full_df_rtn=raw_df_rtn.dropna(axis=0,how='any')
-        l_rtn.append(full_df_rtn)
+        temp_names=list(full_df_rtn)
+        equity_name = temp_names[0]
+        #factor_name = temp_names[2]
+        relative_rtn=pd.Series(full_df_rtn.iloc[:,0]-full_df_rtn.iloc[:,1],name = equity_name)
+        full_relative_rtn=pd.concat([relative_rtn,full_df_rtn.iloc[:,2]],axis=1)
+        l_rtn.append(full_relative_rtn)
 
 """
 Rolling Analysis
@@ -92,16 +99,42 @@ Rolling Analysis
 from scipy.stats.stats import pearsonr
 #result from pearsonr is a tuple (corr, pvalue of corr)
 #parameters
+
+from statsmodels.tsa.stattools import grangercausalitytests
+
 M=220
 l_corr=[]
+arr=np.zeros((len(l_rtn)-M,n_equity*n_factor))
+df_corr=pd.DataFrame(data=arr)
+df_granger=pd.DataFrame(data=arr)
 
 for i in range(n_equity):
     for j in range(n_factor):
         v_corr=np.zeros((len(l_rtn)-M,1))
+        v_granger=np.zeros((len(l_rtn)-M,1))
         sample_df=l_rtn[(i+1)*n_equity+j]
         for t in range(len(l_rtn)-M):
-            relative_rtn=sample_df.iloc[t:t+M,0]-sample_df.iloc[t:t+M,1]
-            f_rtn=sample_df.iloc[t:t+M:,2]
-            temp_corr=pearsonr(relative_rtn,f_rtn)
+            temp_ertn=sample_df.iloc[t:t+M,0]
+            temp_frtn=sample_df.iloc[t:t+M:,1]
+            temp_corr=pearsonr(temp_ertn,temp_frtn)
             v_corr[t]=temp_corr[0]
+            
+            temp_granger=grangercausalitytests(sample_df.iloc[t:t+M,:],1)
+            #v_granger[t]=temp_granger[0]
+            
+        arr[:,i*n_factor+j]=v_corr[:,0]
+        #error if doing arr[:,i*n_factor+j]=v_corr, shape of v_corr is (62,1)
+        #ValueError: could not broadcast input array from shape (62,1) into shape (61)
+        df_corr.iloc[:,i*n_factor+j]=v_corr[:,0]
+        df_granger.iloc[:,i*n_factor+j]=v_granger[:,0]
         l_corr.append(v_corr)
+        
+        outpath1=home + '/Documents/git/working_dir/python/data/sf_test_corr_arr.csv'
+        csv1 = np.savetxt(outpath1,arr,delimiter=',')
+        
+        outpath2=home + '/Documents/git/working_dir/python/data/sf_test_corr_df.csv'
+        csv2 = np.savetxt(outpath2,df_corr,delimiter=',')
+        
+        outpath3=home + '/Documents/git/working_dir/python/data/sf_test_granger_df.xlsx'
+        #df_granger.to_excel(outpath3)
+        
