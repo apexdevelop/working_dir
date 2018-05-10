@@ -47,7 +47,9 @@ for (i in 1:num_ob) {
 }
 
 library(Rbbg)
-conn1=blpConnect(blpapi.jar.file="C:\\blp\\DAPI\\APIv3\\JavaAPI\\v3.10.1.1\\lib\\blpapi3.jar")
+jarpath=paste(home,"/git/working_dir/R/blpapi3.jar",sep="")
+#conn1=blpConnect(blpapi.jar.file="C:\\blp\\DAPI\\APIv3\\JavaAPI\\v3.11.1.1\\lib\\blpapi3.jar")
+conn1=blpConnect(blpapi.jar.file=jarpath)
 g_fields=c("SHORT_NAME","PX_LAST","BEST_TARGET_PRICE","CHG_PCT_2D","CHG_PCT_5D","REL_INDEX")
 x_p=bdp(conn1,col_ticker,g_fields)
 out_name=as.matrix(x_p[,1])
