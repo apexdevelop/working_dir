@@ -8,7 +8,7 @@ start_sh_idx=1;
 end_sh_idx=1;
 %cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 cd(data_dir);
-filename1='factors_v2.xlsx';
+filename1='factors_v4.xlsx';
 filename2a='factor_result_unfilter.xlsx';
 filename2b='factor_result_filter.xlsx';
 filename3='factors_causal.xlsx';
@@ -16,10 +16,10 @@ filename4='factors_corr.xlsx';
 
 % 1-oil,2-shipping,3-utility,4-hitachi,5-steel,6-coal,7-display,8-solar,9-jp_bond,10-kr_bond,11-aluminum1,12-aluminum2,13-aluminum3,14-machinery,15-fullfactor
 v_shnames={'oil','shipping','utility','hitachi','steel','coal','display','solar','jp_bond','kr_bond','aluminum1','aluminum2','aluminum3','machinery','fullfactor'};
-e_ranges={'d1:s1','d1:n1','d1:j1','d1:d1','d1:m1','d1:f1','d1:i1','d1:h1','d1:p1','d1:g1','d1:e1','d1:e1','d1:d1','d1:h1','d1:cm1'};
-b_ranges={'d2:s2','d2:n2','d2:j2','d2:d2','d2:m2','d2:f2','d2:i2','d2:h2','d2:p2','d2:g2','d2:e2','d2:e2','d2:d2','d2:h2','d2:cm2'};
-d_ranges={'d5:s51','d5:n39','d5:j31','d5:d18','d5:m41','d5:i28','d5:i33','d5:h24','d5:p28','d5:g23','d5:e31','d5:e32','d5:d31','d5:h24','d5:cm190'};
-fchg_ranges={'u5:y51','q5:u39','l5:p31','g5:k18','o5:s41','h5:l27','k5:o33','j5:n24','r5:v28','i5:m23','h5:k31','h5:l32','h5:l31','j5:n19'};
+e_ranges={'d1:i1','d1:n1','d1:j1','d1:d1','d1:m1','d1:f1','d1:i1','d1:h1','d1:p1','d1:g1','d1:e1','d1:e1','d1:d1','d1:h1','d1:cm1'};
+b_ranges={'d2:i2','d2:n2','d2:j2','d2:d2','d2:m2','d2:f2','d2:i2','d2:h2','d2:p2','d2:g2','d2:e2','d2:e2','d2:d2','d2:h2','d2:cm2'};
+d_ranges={'d5:i49','d5:n39','d5:j31','d5:d18','d5:m41','d5:i28','d5:i33','d5:h24','d5:p28','d5:g23','d5:e31','d5:e32','d5:d31','d5:h24','d5:cm190'};
+fchg_ranges={'u5:y49','q5:u39','l5:p31','g5:k18','o5:s41','h5:l27','k5:o33','j5:n24','r5:v28','i5:m23','h5:k31','h5:l32','h5:l31','j5:n19'};
 
 %% Initialize parameters
 
