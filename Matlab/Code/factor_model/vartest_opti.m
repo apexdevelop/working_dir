@@ -4,11 +4,11 @@
 % z_window=40
 % M=225
 clearvars;
-sh_idx=1;
+sh_idx=14;
 startdate='2012/3/12';
 % enddate=today();
 % enddate='2017/5/21';
-enddate='2018/3/30';
+enddate='2018/4/30';
 home_dir = getuserdir();
 java_dir = strcat(home_dir,'/git/working_dir/Matlab/blpapi3.jar');
 javaaddpath(java_dir);

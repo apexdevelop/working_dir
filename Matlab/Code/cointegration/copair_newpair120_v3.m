@@ -90,7 +90,10 @@ v_Date=[];
 min_spread=1;
 max_pADF=0.4;
 
-cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/Coint');
+home_dir = getuserdir();
+data_dir = strcat(home_dir,'/git/working_dir/Matlab/Data/Coint');
+cd(data_dir);
+% cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/Coint');
 S_OPTI=load(strcat('c_OPTI_betaidx_',num2str(beta_idx),'_isadf_',is_adf));
 % S_OPTI=load(strcat('c_OPTI_',num2str(M),'_',num2str(N)));
 c_OPTI=S_OPTI.c_OPTI;

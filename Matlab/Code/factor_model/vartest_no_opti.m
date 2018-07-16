@@ -5,7 +5,7 @@ java_dir = strcat(home_dir,'/git/working_dir/Matlab/blpapi3.jar');
 javaaddpath(java_dir);
 data_dir = strcat(home_dir,'/git/working_dir/Matlab/Data/factor/single_factor');
 start_sh_idx=1;
-end_sh_idx=1;
+end_sh_idx=14;
 %cd('C:/Users/YChen/Documents/git/working_dir/Matlab/Data/factor/single_factor');
 cd(data_dir);
 filename1='factors_v4.xlsx';
