@@ -73,7 +73,8 @@ def betaidx_rollingMatrix(beta_idx,x,start,end):
 
 
 #def main():
-    path = 'C:\\Users\\YChen\\Documents\\git\\working_dir\\python\\Cointegration_inout_v0.csv'
+    #path = 'C:\\Users\\YChen\\Documents\\git\\working_dir\\python\\Cointegration_inout_v0.csv'
+    path = 'C:\\Users\\YanCh\\Documents\\working_dir\\python\\data\\Cointegration_inout_v0.csv'
     #call date and price1 and price2. prices will turn to log value
     raw = openFile(path)
     #remove any number is smaller than 0
@@ -161,7 +162,8 @@ def betaidx_rollingMatrix(beta_idx,x,start,end):
     #save the result
     raw_output = np.concatenate((raw[0,None].T,prices[0:].T,v_residual,zscr,v_ADF,v_pADF,v_h,v_Beta),axis=1)
     #raw = np.vstack((raw[0,:].T,prices[0:,:].T),axis=1)
-    saveFile('C:\\Users\\YChen\\Documents\\git\\working_dir\\python\\Cointegration_output_v0.csv',raw_output)
+    saveFile(path,raw_output)
+    #saveFile('C:\\Users\\YChen\\Documents\\git\\working_dir\\python\\Cointegration_output_v0.csv',raw_output)
             
 #run model            
 #main()
